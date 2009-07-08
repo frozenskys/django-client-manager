@@ -1,0 +1,4 @@
+baclients
+*.pyc
+.project
+.pydevproject
