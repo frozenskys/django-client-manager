@@ -15,6 +15,7 @@ class ClientNote(models.Model):
     client = models.ForeignKey(Client)
     note_title = models.CharField(max_length=150, unique=True)
     note = models.TextField(blank=True, null=True)
+    timestamp = models.DateTimeField()
     
     def __unicode__(self):
         return '%s - %s' % (self.client, self.note_title)
@@ -38,10 +39,9 @@ class Contact(models.Model):
 class Access(models.Model):
     client = models.ForeignKey(Client)
     access_type = models.CharField(max_length=150)
-    url = models.URLField(max_length=150, blank=True, null=True)
+    url = models.CharField(max_length=150, blank=True, null=True)
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
-    note = models.TextField(blank=True, null=True)
     
     def __unicode__(self):
         return '%s - %s' % (self.client, self.access_type)
@@ -54,6 +54,7 @@ class AccessNote(models.Model):
     access = models.ForeignKey(Access)
     note_title = models.CharField(max_length=150, unique=True)
     note = models.TextField(blank=True, null=True)
+    timestamp = models.DateTimeField()
     
     def __unicode__(self):
         return '%s - %s' % (self.access, self.note_title)
