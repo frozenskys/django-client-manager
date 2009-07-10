@@ -13,16 +13,17 @@ class Client(models.Model):
         
 class ClientNote(models.Model):
     client = models.ForeignKey(Client)
-    note_title = models.CharField(max_length=150, unique=True)
+    title = models.CharField(max_length=150, unique=True)
     note = models.TextField(blank=True, null=True)
-    timestamp = models.DateTimeField()
+    file  = models.FileField(blank=True, null=True, upload_to='uploads')
+    timestamp = models.DateTimeField(auto_now=True)
     
     def __unicode__(self):
-        return '%s - %s' % (self.client, self.note_title)
+        return '%s - %s' % (self.client, self.title)
     
     class Meta:
-        ordering = ('note_title', 'client')
-    
+        ordering = ('title', 'client')
+            
 class Contact(models.Model):
     name = models.CharField(max_length=150, unique=True)
     email = models.EmailField()
@@ -52,12 +53,13 @@ class Access(models.Model):
         
 class AccessNote(models.Model):
     access = models.ForeignKey(Access)
-    note_title = models.CharField(max_length=150, unique=True)
+    title = models.CharField(max_length=150, unique=True)
     note = models.TextField(blank=True, null=True)
-    timestamp = models.DateTimeField()
+    file  = models.FileField(blank=True, null=True, upload_to='uploads')
+    timestamp = models.DateTimeField(auto_now=True)
     
     def __unicode__(self):
-        return '%s - %s' % (self.access, self.note_title)
+        return '%s - %s' % (self.access, self.title)
     
     class Meta:
-        ordering = ('access', 'note_title')
+        ordering = ('access', 'title')

@@ -2,3 +2,5 @@ baclients
 *.pyc
 .project
 .pydevproject
+site_media/uploads/*.*
+

@@ -1,8 +1,9 @@
 from django.contrib import admin
-from baclients.clients.models import Client, ClientNote, Contact, Access, AccessNote
+from baclients.clients.models import Client, ClientNote
+from baclients.clients.models import Access, AccessNote, Contact
 
 class AccessNoteAdmin(admin.ModelAdmin):
-    list_display = ('note_title', 'access')
+    list_display = ('title', 'access', 'timestamp')
     search_fields = ('access__client',)
     list_filter = ('access',)
     
@@ -22,7 +23,7 @@ class AccessInline(admin.TabularInline):
     fields = ('access_type', 'url', 'username', 'password')
         
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'primary_phone', 'client')
+    list_display = ('name', 'client', 'email', 'primary_phone')
     search_fields = ('client__name', 'name')
     list_filter = ('client',)
     
@@ -33,10 +34,10 @@ class ContactInline(admin.TabularInline):
 class ClientAdmin(admin.ModelAdmin):
     list_display = ('name', 'project_title')
     inlines = [ContactInline, AccessInline]
-
+    
 class ClientNoteAdmin(admin.ModelAdmin):
-    list_display = ('note_title', 'client')
-    search_fields = ('client__name',)
+    list_display = ('title', 'client', 'timestamp')
+    search_fields = ('client__name', 'title')
     list_filter = ('client',)
                     
 admin.site.register(Access, AccessAdmin)
